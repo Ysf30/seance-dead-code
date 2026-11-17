@@ -1,0 +1,1 @@
+{"description":"Talk to your dead code — a client-side dead-code graveyard. Kiroween 2026, Resurrection category.","license":"MIT","name":"seance","private":true,"scripts":{"test":"node --test tests/analyze.test.mjs"},"type":"module","version":"0.1.0"}

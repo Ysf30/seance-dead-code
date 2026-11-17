@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Séance — Talk to Your Dead Code</title>
+<meta name="description" content="Séance finds dead code in your repository and shows it as a haunted graveyard. Bury it or resurrect it. Kiroween 2026, Resurrection category.">
+<link rel="stylesheet" href="styles.css">
+<script src="vendor/acorn.js"></script>
+</head>
+<body>
+<div class="moon" aria-hidden="true"></div>
+<div class="fog fog-a" aria-hidden="true"></div>
+<div class="fog fog-b" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="candle" aria-hidden="true"><span class="flame"></span></div>
+  <h1>🕯️ Séance</h1>
+  <p class="tagline">Talk to your dead code.</p>
+  <p class="intro">Every codebase is haunted by functions nobody calls, exports nobody
+  imports, and imports nobody uses. Séance finds them, lays them out as a
+  graveyard, and lets you <strong>Bury</strong> them or <strong>Resurrect</strong> them.
+  Your code never leaves your machine — except when you ask it to fetch a public
+  GitHub repo.</p>
+</header>
+
+<main>
+  <section class="panel input-panel" aria-label="Analyse a repository">
+    <h2>Summon the dead</h2>
+
+    <div class="input-row">
+      <label for="repo-url">GitHub repository URL</label>
+      <div class="inline">
+        <input id="repo-url" type="url" placeholder="https://github.com/owner/repo" autocomplete="off">
+        <button id="btn-analyze-url" class="btn btn-primary">Analyse repo</button>
+      </div>
+      <p class="hint">Public repos only. Fetched through the unauthenticated GitHub API (60 requests/hour).</p>
+    </div>
+
+    <div class="input-row">
+      <label for="file-input">Or upload code files</label>
+      <div class="inline">
+        <input id="file-input" type="file" multiple accept=".js,.jsx,.ts,.tsx,.mjs,.py">
+        <button id="btn-analyze-files" class="btn">Analyse files</button>
+      </div>
+      <p class="hint">Files are read locally in your browser. Nothing is uploaded anywhere.</p>
+    </div>
+
+    <div class="input-row">
+      <label for="paste-ext">Or paste code</label>
+      <div class="inline">
+        <select id="paste-ext" aria-label="Pasted code language">
+          <option value="js">JavaScript</option>
+          <option value="py">Python</option>
+        </select>
+        <button id="btn-analyze-paste" class="btn">Analyse pasted code</button>
+      </div>
+      <textarea id="paste-box" rows="6" spellcheck="false" placeholder="Paste code here…"></textarea>
+    </div>
+
+    <div class="input-row demo-row">
+      <button id="btn-demo" class="btn btn-ghost">👻 Try the demo — no setup, no network</button>
+      <p class="hint">Analyses a built-in sample repo with 10 planted dead items.</p>
+    </div>
+
+    <p id="status" class="status" role="status"></p>
+  </section>
+
+  <section id="results" class="panel results-panel" hidden aria-label="Graveyard">
+    <h2>🪦 The Graveyard</h2>
+    <div id="stats" class="stats"></div>
+    <p id="scope-note" class="hint"></p>
+    <div id="graveyard" class="graveyard"></div>
+
+    <div id="detail" class="detail" hidden>
+      <button id="detail-close" class="btn btn-small" aria-label="Close detail">✕ Close</button>
+      <h3 id="detail-title"></h3>
+      <p id="detail-meta" class="hint"></p>
+      <pre id="detail-snippet"></pre>
+      <p id="detail-cause"></p>
+      <p id="detail-explanation"></p>
+      <p id="detail-safety"></p>
+      <div class="detail-actions">
+        <button id="detail-bury" class="btn btn-danger">⚰️ Bury it</button>
+        <button id="detail-resurrect" class="btn btn-primary">🌙 Resurrect it</button>
+      </div>
+    </div>
+
+    <div class="lists">
+      <section class="list-box" aria-label="Burial list">
+        <h3>⚰️ Burial List <span id="burial-count" class="count">0</span></h3>
+        <ul id="burial-list"></ul>
+        <p class="hint">Candidates for deletion. Séance never deletes anything — export the report and apply it in a pull request.</p>
+      </section>
+      <section class="list-box" aria-label="Revival kit">
+        <h3>🌙 Revival Kit <span id="revival-count" class="count">0</span></h3>
+        <ul id="revival-list"></ul>
+        <p class="hint">Dead code worth keeping, preserved as reusable snippets.</p>
+      </section>
+    </div>
+
+    <div class="export-row">
+      <button id="btn-export-md" class="btn btn-primary">⬇ Export Markdown report</button>
+      <button id="btn-export-json" class="btn">⬇ Export JSON</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Séance — Kiroween 2026 · Resurrection category · Built with a Kiro spec
+  (specs, steering, hooks, custom agents) in <code>/.kiro</code>. JavaScript
+  analysis is AST-based (Acorn); Python analysis is heuristic and labelled as
+  such. Explanations are rule-based — no AI judgement is involved.</p>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"hooks":[{"action":{"command":"npm test","type":"command"},"description":"After the agent saves or edits any analyser, app, or test file, run the Node test suite so regressions surface immediately.","matcher":"\\.(js|html|css)$","name":"Run tests on save","timeout":120,"trigger":"PostFileSave"}],"version":"v1"}

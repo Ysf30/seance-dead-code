@@ -1,0 +1,273 @@
+/* Séance — graveyard theme. CSS only: no external images or web fonts. */
+
+:root {
+  --night: #0b0e1a;
+  --night-2: #12172a;
+  --stone: #1c2338;
+  --stone-2: #252d47;
+  --bone: #e8e6d5;
+  --bone-dim: #b9b7a4;
+  --moss: #8fce9b;
+  --moss-dim: #5d8a68;
+  --spirit: #b79cff;
+  --ember: #ff7a59;
+  --gold: #e8c15a;
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--night); }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: var(--bone);
+  background:
+    radial-gradient(ellipse 90% 55% at 50% -10%, #1d2440 0%, transparent 70%),
+    linear-gradient(180deg, #0b0e1a 0%, #0d1122 55%, #0a0d18 100%);
+  overflow-x: hidden;
+}
+
+/* Moon */
+.moon {
+  position: fixed;
+  top: 24px;
+  right: 6vw;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 35%, #fffbe8 0%, #efe9c8 45%, #d8d2ac 100%);
+  box-shadow: 0 0 60px 18px rgba(232, 230, 213, 0.16);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Fog bands */
+.fog {
+  position: fixed;
+  left: -10%;
+  width: 120%;
+  height: 180px;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse 50% 100% at 50% 50%, rgba(160, 175, 205, 0.10), transparent 70%);
+}
+.fog-a { bottom: 8%; animation: drift 26s ease-in-out infinite alternate; }
+.fog-b { bottom: 22%; animation: drift 34s ease-in-out infinite alternate-reverse; }
+@keyframes drift { from { transform: translateX(-3%); } to { transform: translateX(3%); } }
+
+header.site-header, main, footer { position: relative; z-index: 1; }
+
+header.site-header {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 56px 20px 8px;
+  text-align: center;
+}
+
+.candle { display: inline-block; margin-bottom: 4px; }
+.flame {
+  display: block;
+  width: 12px;
+  height: 26px;
+  margin: 0 auto;
+  background: radial-gradient(ellipse at 50% 80%, #ffe9a8 0%, #ff9d45 55%, #ff5f2e 100%);
+  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  animation: flicker 1.6s ease-in-out infinite alternate;
+  transform-origin: 50% 100%;
+}
+@keyframes flicker {
+  from { transform: scaleY(1) rotate(-2deg); opacity: 0.92; }
+  to { transform: scaleY(1.14) rotate(2deg); opacity: 1; }
+}
+
+h1 {
+  margin: 0;
+  font-size: 3rem;
+  letter-spacing: 0.06em;
+  color: var(--bone);
+  text-shadow: 0 0 24px rgba(183, 156, 255, 0.35);
+}
+.tagline { margin: 4px 0 14px; font-style: italic; color: var(--spirit); font-size: 1.15rem; }
+.intro { max-width: 640px; margin: 0 auto; line-height: 1.6; color: var(--bone-dim); }
+.intro strong { color: var(--bone); }
+
+main { max-width: 880px; margin: 0 auto; padding: 20px; }
+
+.panel {
+  background: rgba(18, 23, 42, 0.88);
+  border: 1px solid #2a3352;
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+h2 { margin: 0 0 14px; font-size: 1.5rem; color: var(--bone); }
+h3 { margin: 0 0 10px; font-size: 1.15rem; }
+
+.input-row { margin-bottom: 18px; }
+.input-row label { display: block; margin-bottom: 6px; font-weight: bold; color: var(--bone); }
+.inline { display: flex; gap: 8px; flex-wrap: wrap; }
+.inline input[type="url"] { flex: 1; min-width: 220px; }
+
+input[type="url"], select, textarea {
+  background: #0d1122;
+  border: 1px solid #39415f;
+  color: var(--bone);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+input[type="url"]:focus, select:focus, textarea:focus { outline: 2px solid var(--spirit); }
+textarea { width: 100%; margin-top: 8px; resize: vertical; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.9rem; }
+input[type="file"] { color: var(--bone-dim); }
+
+.hint { font-size: 0.88rem; color: var(--bone-dim); line-height: 1.5; margin: 6px 0 0; }
+.status { margin: 10px 0 0; min-height: 1.2em; color: var(--gold); }
+.status.error { color: var(--ember); }
+.demo-row { border-top: 1px solid #2a3352; padding-top: 16px; }
+
+.btn {
+  background: var(--stone-2);
+  color: var(--bone);
+  border: 1px solid #39415f;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+.btn:hover { background: #2e3757; }
+.btn-primary { background: #4a3a7d; border-color: var(--spirit); }
+.btn-primary:hover { background: #5a4696; }
+.btn-ghost { background: transparent; border-color: var(--moss-dim); color: var(--moss); }
+.btn-ghost:hover { background: rgba(143, 206, 155, 0.12); }
+.btn-danger { background: #5a2a22; border-color: var(--ember); }
+.btn-danger:hover { background: #6d3329; }
+.btn-small { padding: 6px 10px; font-size: 0.9rem; }
+
+/* Stats */
+.stats {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.stat {
+  background: var(--stone);
+  border: 1px solid #2a3352;
+  border-radius: 10px;
+  padding: 10px 14px;
+  min-width: 110px;
+}
+.stat b { display: block; font-size: 1.6rem; color: var(--bone); }
+.stat span { font-size: 0.85rem; color: var(--bone-dim); }
+
+/* Graveyard */
+.graveyard {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+.tombstone {
+  background: linear-gradient(180deg, #2a3249 0%, #1c2338 100%);
+  border: 1px solid #39415f;
+  border-radius: 120px 120px 10px 10px / 90px 90px 10px 10px;
+  padding: 26px 14px 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.3s ease;
+}
+.tombstone:hover { transform: translateY(-4px); box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5); }
+.tombstone .rip { font-size: 0.75rem; letter-spacing: 0.25em; color: var(--bone-dim); }
+.tombstone .tomb-name {
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: var(--bone);
+  word-break: break-word;
+  margin: 6px 0;
+}
+.tombstone .tomb-meta { font-size: 0.85rem; color: var(--bone-dim); }
+.tombstone .badge {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--moss-dim);
+  color: var(--moss);
+}
+.tombstone .badge.kind-import, .tombstone .badge.kind-unreachable { border-color: var(--gold); color: var(--gold); }
+.tombstone.buried { opacity: 0.45; transform: translateY(8px); }
+.tombstone.buried .badge { border-color: var(--ember); color: var(--ember); }
+.tombstone.resurrected { border-color: var(--spirit); box-shadow: 0 0 18px rgba(183, 156, 255, 0.25); }
+.tombstone.resurrected .badge { border-color: var(--spirit); color: var(--spirit); }
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 30px 10px;
+  color: var(--moss);
+  font-size: 1.15rem;
+}
+
+/* Detail drawer */
+.detail {
+  margin-top: 18px;
+  background: var(--stone);
+  border: 1px solid #39415f;
+  border-radius: 12px;
+  padding: 18px;
+}
+.detail pre {
+  background: #0d1122;
+  border: 1px solid #2a3352;
+  border-radius: 8px;
+  padding: 12px;
+  overflow-x: auto;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.detail-actions { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+
+/* Lists */
+.lists { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
+@media (max-width: 640px) { .lists { grid-template-columns: 1fr; } }
+.list-box { background: var(--stone); border: 1px solid #2a3352; border-radius: 12px; padding: 14px; }
+.list-box ul { list-style: none; margin: 0; padding: 0; }
+.list-box li { padding: 6px 0; border-bottom: 1px solid #2a3352; font-size: 0.95rem; }
+.list-box li:last-child { border-bottom: none; }
+.list-box li code { color: var(--spirit); }
+.count {
+  background: #0d1122;
+  border: 1px solid #39415f;
+  border-radius: 12px;
+  padding: 1px 8px;
+  font-size: 0.85rem;
+}
+
+.export-row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+
+footer {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 8px 20px 40px;
+  color: var(--bone-dim);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  text-align: center;
+}
+footer code { color: var(--spirit); }
+
+@media (max-width: 640px) {
+  h1 { font-size: 2.2rem; }
+  .moon { width: 60px; height: 60px; }
+}
